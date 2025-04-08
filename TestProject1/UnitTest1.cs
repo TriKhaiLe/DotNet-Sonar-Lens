@@ -1,5 +1,6 @@
 using DotNetSonarLens;
 using DotNetSonarLens.Controllers;
+using Xunit;
 
 namespace TestProject1
 {
