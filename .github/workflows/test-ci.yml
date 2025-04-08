@@ -1,0 +1,32 @@
+name: Test CI for test-ci branch
+
+on:
+  push:
+    branches:
+      - test-ci
+  pull_request:
+    branches:
+      - test-ci
+
+jobs:
+  build:
+    name: Build & Test .NET project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'  # Hoặc phiên bản bạn đang dùng
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
