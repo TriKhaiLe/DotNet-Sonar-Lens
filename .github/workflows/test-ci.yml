@@ -20,7 +20,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'  # Hoặc phiên bản bạn đang dùng
+          dotnet-version: "8.0.x" # Hoặc phiên bản bạn đang dùng
 
       - name: Restore dependencies
         run: dotnet restore
@@ -30,3 +30,12 @@ jobs:
 
       - name: Run tests
         run: dotnet test --no-build --verbosity normal
+
+      - name: Publish project
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-app
+          path: ./publish
